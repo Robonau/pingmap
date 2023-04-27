@@ -6,6 +6,8 @@ COPY ./package*.json ./tsconfig.json ./
 
 RUN npm install && npm cache clean --force
 
+RUN npx prisma generate
+
 COPY . .
 
 RUN npm run build
