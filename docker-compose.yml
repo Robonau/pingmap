@@ -1,0 +1,9 @@
+version: '3.7'
+services:
+
+  dev:
+    build:
+      context: .
+    volumes:
+      - '.:/app'
+    restart: unless-stopped
