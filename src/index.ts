@@ -48,6 +48,29 @@ main().catch(async (e) => {
     process.exit(1)
 })
 
+function gethosts(){
+    let hostss = ''
+    if(process.env.Hostss1 !== undefined){
+        hostss += process.env.Hostss1
+    }
+    if(process.env.Hostss2 !== undefined){
+        hostss += process.env.Hostss2
+    }
+    if(process.env.Hostss3 !== undefined){
+        hostss += process.env.Hostss3
+    }
+    if(process.env.Hostss4 !== undefined){
+        hostss += process.env.Hostss4
+    }
+    if(process.env.Hostss5 !== undefined){
+        hostss += process.env.Hostss5
+    }
+    if(process.env.Hostss6 !== undefined){
+        hostss += process.env.Hostss6
+    }
+    return hostss
+}
+
 async function main (): Promise<void> {
     await prisma.$connect()
     prisma.$on('error', (e) => {
@@ -62,7 +85,7 @@ async function main (): Promise<void> {
             active: false
         }
     })
-    await overlist(process.env.Hostss?.split(',') ?? [])
+    await overlist(gethosts().split(',') ?? [])
     await getlocations()
     await new Promise<void>((resolve) => {
         locations.on('empty', () => { resolve() })
