@@ -19,4 +19,4 @@ FROM develop-stage as prod-stage
 
 WORKDIR /app
 
-CMD [ "npm", "run", "startjs" ]
+CMD [ "npm", "run", "startjs", "--logs-max=0" ]
