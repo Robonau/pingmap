@@ -6,6 +6,8 @@
   "type": "module",
   "scripts": {
     "start": "npx ts-node src/index.ts",
+    "build": "npx tsc",
+    "startjs": "node dist/index.js",
     "test": "echo \"Error: no test specified\" && exit 1",
     "eslint": "eslint --color --ext .html,.js,.json,.jsx,.md,.ts,.tsx *.* src",
     "eslint:fix": "npm run eslint -- --fix"
