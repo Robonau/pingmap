@@ -13,7 +13,6 @@ RUN npm run build
 RUN apk update && \
 	apk add pingu
 
-# build stage
 FROM develop-stage as prod-stage
 
 WORKDIR /app
