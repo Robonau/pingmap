@@ -1,5 +1,5 @@
 import ping from 'ping'
-import { PrismaClient } from '@prisma/client'
+import { GetPing, Prisma, PrismaClient } from '@prisma/client'
 import axios from 'axios'
 import PQueue from 'p-queue'
 
@@ -73,7 +73,7 @@ function gethosts(){
 
 async function main (): Promise<void> {
     await prisma.$connect()
-    prisma.$on('error', (e) => {
+    prisma.$on('error', (e: Prisma.LogEvent) => {
         console.log('Error: ')
         console.log(e)
     })
@@ -97,7 +97,7 @@ async function main (): Promise<void> {
         select: { name: true },
         where: { active: true }
     })
-    setInterval(() => { void overlist(data.map(value => value.name)) }, 60000)
+    setInterval(() => { void overlist(data.map((value: { name: string }): string => value.name)) }, 60000)
 }
 
 async function getlocations (): Promise<void> {
@@ -110,7 +110,7 @@ async function getlocations (): Promise<void> {
             ]
         }
     })
-    all.map(async (value) => {
+    all.map(async (value: GetPing) => {
         await locations.add(async () => {
             const { data } = await axios.get<locationdata>(`https://ipapi.co/${value.ip}/json`)
             if (data.longitude === null || data.latitude === null || data.country_name === null) {
